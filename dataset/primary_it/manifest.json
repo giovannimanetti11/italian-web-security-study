@@ -1,0 +1,154 @@
+{
+  "dataset": "primary_it",
+  "dataset_id": "dataset_primary_it_v1",
+  "description": "Frozen snapshot of Dataset A (primary_it) \u2014 the complete Tranco top-1M .it pool, three combined crawl runs. Separates 'tool version' (crawler/analyzer code, still evolving) from 'dataset version' (this frozen artifact) from 'analysis version' (statistics run against this manifest's data). Not a git tag by design \u2014 a dataset snapshot and a tool release are different kinds of artifact with different lifecycles.",
+  "frozen_at": "2026-07-09T19:00:00+02:00",
+  "tool_version_at_freeze": "v0.2.1-measurement-metrics",
+  "total_sites": 10022,
+  "sampling_frame": {
+    "source": "Tranco daily list, https://tranco-list.eu/top-1m.csv.zip",
+    "list_date": "2026-07-08",
+    "filter": ".it TLD suffix match",
+    "file": "dataset/primary_it/tranco_it_full.csv",
+    "sha256": "6d57a4bdf1fecc941b5218d88c7b5d5b9980e876f7f5abdb98d4fdbc6db25471",
+    "size": 10022
+  },
+  "runs": [
+    {
+      "run_label": "pilot_500",
+      "domain_list_file": "dataset/primary_it/pilot_500.csv",
+      "domain_list_sha256": "04ead24fa58e7c31ad27a2e91dcd8570938d4a80a50806add1d47a43428bec56",
+      "n": 500,
+      "sampling_method": "random_without_replacement",
+      "seed": 20260709,
+      "started_at": "2026-07-09T11:29:14.524670+02:00",
+      "finished_at": "2026-07-09T11:30:11.595965+02:00",
+      "crawler_version": "0.1.0",
+      "measurement_profile": null,
+      "measurement_version": "pilot-500-real-sample",
+      "measurement_modules": [
+        "headers",
+        "csp",
+        "cookies",
+        "tls",
+        "fingerprint"
+      ],
+      "note": "Predates the measurement_profile system and the DNS/email, well-known, and CORS analyzers (M3). Not retroactively backfilled \u2014 this run represents exactly what was measured at the time, no reconstruction."
+    },
+    {
+      "run_label": "pilot_5000",
+      "domain_list_file": "dataset/primary_it/pilot_5000.csv",
+      "domain_list_sha256": "1e0ca16fd55840c63f6feeb59dcf2a3dbaa6f2ab40244dead27df5074062fc0d",
+      "n": 5000,
+      "sampling_method": "random_without_replacement_disjoint_from_pilot_500",
+      "seed": 20260710,
+      "started_at": "2026-07-09T12:47:20.548259+02:00",
+      "finished_at": "2026-07-09T13:31:31.630167+02:00",
+      "crawler_version": "0.2.0",
+      "measurement_profile": "baseline_v1",
+      "measurement_version": "pilot-5000-operational-validation",
+      "measurement_modules": [
+        "headers",
+        "csp",
+        "cookies",
+        "tls",
+        "fingerprint",
+        "dns_email",
+        "wellknown",
+        "cors"
+      ]
+    },
+    {
+      "run_label": "final_remaining_pool",
+      "domain_list_file": "dataset/primary_it/final_remaining.csv",
+      "domain_list_sha256": "ecf3fc19d039fb4a2ee9e3d4493e786ae8ecb1238601aea8a152567b33b4536b",
+      "n": 4522,
+      "sampling_method": "deterministic_set_difference_not_a_sample",
+      "started_at": "2026-07-09T14:35:02.692638+02:00",
+      "finished_at": "2026-07-09T15:42:09.405863+02:00",
+      "crawler_version": "0.2.0",
+      "measurement_profile": "baseline_v1",
+      "measurement_version": "final-full-pool-completion",
+      "measurement_modules": [
+        "headers",
+        "csp",
+        "cookies",
+        "tls",
+        "fingerprint",
+        "dns_email",
+        "wellknown",
+        "cors"
+      ]
+    }
+  ],
+  "collection_window": {
+    "date": "2026-07-09",
+    "note": "Single-day snapshot study, not longitudinal (yet). All three runs collected within the same day."
+  },
+  "analysis_subsets": {
+    "note": "Defined so no statistic is silently computed against a base rate it doesn't actually have. 'Full primary_it' is for sample description and coverage reporting, not implicitly assumed as the N for every test.",
+    "dataset_A_security_headers_corpus": {
+      "n": 8829,
+      "definition": "Every scan with a complete security_headers row (HSTS/CSP/X-Frame-Options/X-Content-Type-Options/Referrer-Policy/Permissions-Policy) plus cookies, TLS, fingerprint \u2014 covered by all three runs.",
+      "coverage": "100% of successful scans across all three runs"
+    },
+    "dataset_B_extended_security_posture": {
+      "n": 8438,
+      "definition": "Successful scans from pilot_5000 + final_remaining_pool only, which have SPF/DMARC/DKIM, security.txt/robots.txt/sitemap.xml, and CORS policy characteristics. Excludes pilot_500 (predates these analyzers).",
+      "coverage": "Successful scans from 2 of 3 runs"
+    },
+    "dataset_C_full_primary_it": {
+      "n": 10022,
+      "definition": "All registered sites, regardless of scan outcome \u2014 used for sample description, coverage/error-rate reporting, and methodology, not assumed as the base n for every feature-specific test.",
+      "coverage": "100% of the sampling frame"
+    }
+  },
+  "schema_version": "008_sector_confidence",
+  "record_counts": {
+    "sites": 10022,
+    "scans": 10020,
+    "security_headers": 8829,
+    "csp_analysis": 1646,
+    "cookies": 7240,
+    "tls_info": 10020,
+    "certificates": 8864,
+    "technologies": 11367,
+    "dns_email_security": 9520,
+    "wellknown_resources": 8438,
+    "cors_analysis": 8438,
+    "scan_metrics": 9520,
+    "crawl_events": 2349
+  },
+  "known_gaps": [
+    "2 domains lost to unhandled per-scan errors (0.02% of the pool), logged in crawl_events, root cause not fully confirmed for either \u2014 see paper/data_quality_report.md \u00a76.",
+    "scan_metrics missing for pilot_500's 500 scans \u2014 table added after that run, not backfilled.",
+    "dns_email_security/wellknown_resources/cors_analysis missing for pilot_500's scans \u2014 those analyzers (M3) postdate that run, not backfilled \u2014 see analysis_subsets above."
+  ],
+  "anonymization": {
+    "method": "SHA-256(domain)",
+    "salt": null,
+    "reversible": false,
+    "classification": "pseudonymization, not strong anonymization",
+    "note": "Without a salt, a dictionary attack against known .it domains can invert the hash \u2014 domains are public information, so this isn't a severe exposure, but it is not cryptographically irreversible in the way 'anonymized' implies. Use 'pseudonymized domain identifiers' in the paper, not 'anonymized domains'."
+  },
+  "anonymized_export": {
+    "file": "dataset/primary_it/exports/primary_it_anonymized.csv",
+    "sha256": "7611185b3516a223537bf14205a218cd80217ced8dc8c46dc12878934f89dad3",
+    "rows": 10020,
+    "columns": 56,
+    "description": "One row per scan. Domain replaced with SHA-256(domain) \u2014 no cleartext domain, no site_id-to-domain mapping included. Every measured feature flattened: headers, CSP, cookie aggregates, TLS/certificate, DNS/email, well-known, CORS, detected CMS/CDN.",
+    "policy_reference": "paper/methodology.md \u00a75 (data handling policy)"
+  },
+  "related_documents": [
+    "paper/methodology.md",
+    "paper/data_quality_report.md",
+    "paper/data_dictionary.md",
+    "paper/preliminary_results.md",
+    "paper/sector_classification.md",
+    "dataset/primary_it/README.md"
+  ],
+  "public_export": {
+    "file": "primary_it_pseudonymized.csv",
+    "note": "sector and sector_confidence columns are suppressed in the public export (present only in the private working database). Rationale: sector categories University (n=51) and Media (n=28) are derived from small, hand-built, closed candidate lists (~55 and ~34 named entities respectively), and PA (n=156) from an enumerable comune./provincia./regione./.gov.it pattern matching the public ISTAT municipality list. Publishing sector alongside the unsalted domain_sha256 would let an attacker narrow a dictionary attack from the full .it domain space to these small closed lists, meaningfully increasing practical re-identification risk for specific institutions. Aggregate sector counts are still reported in paper/sector_classification.md and the paper itself (Section 4.8); only the per-row public linkage is suppressed."
+  }
+}

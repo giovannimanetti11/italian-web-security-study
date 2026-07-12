@@ -1,0 +1,11 @@
+Adoption rates with 95% Wilson confidence intervals
+=======================================================
+
+hsts                32.8%  [ 31.8%,  33.8%]  n=8829   (Dataset A (n=8829))
+csp_present         18.7%  [ 17.9%,  19.5%]  n=8829   (Dataset A (n=8829))
+csp_restrictive      0.7%  [  0.4%,   1.2%]  n=1646   (CSP-present subset (n=1646))
+xfo                 41.8%  [ 40.8%,  42.9%]  n=8829   (Dataset A (n=8829))
+spf                 55.5%  [ 54.5%,  56.5%]  n=9520   (Dataset B (n=9520))
+dmarc               43.8%  [ 42.9%,  44.8%]  n=9520   (Dataset B (n=9520))
+security_txt         2.4%  [  2.1%,   2.7%]  n=8438   (Dataset B (n=8438))
+reachable           88.1%  [ 87.5%,  88.7%]  n=10020  (Dataset C (n=10020))

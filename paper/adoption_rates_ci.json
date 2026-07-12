@@ -1,0 +1,66 @@
+{
+  "hsts": {
+    "successes": 2895,
+    "n": 8829,
+    "proportion": 0.3279,
+    "ci_low": 0.3182,
+    "ci_high": 0.3378,
+    "subset": "Dataset A (n=8829)"
+  },
+  "csp_present": {
+    "successes": 1653,
+    "n": 8829,
+    "proportion": 0.1872,
+    "ci_low": 0.1792,
+    "ci_high": 0.1955,
+    "subset": "Dataset A (n=8829)"
+  },
+  "csp_restrictive": {
+    "successes": 11,
+    "n": 1646,
+    "proportion": 0.0067,
+    "ci_low": 0.0037,
+    "ci_high": 0.0119,
+    "subset": "CSP-present subset (n=1646)"
+  },
+  "xfo": {
+    "successes": 3694,
+    "n": 8829,
+    "proportion": 0.4184,
+    "ci_low": 0.4081,
+    "ci_high": 0.4287,
+    "subset": "Dataset A (n=8829)"
+  },
+  "spf": {
+    "successes": 5287,
+    "n": 9520,
+    "proportion": 0.5554,
+    "ci_low": 0.5454,
+    "ci_high": 0.5653,
+    "subset": "Dataset B (n=9520)"
+  },
+  "dmarc": {
+    "successes": 4174,
+    "n": 9520,
+    "proportion": 0.4384,
+    "ci_low": 0.4285,
+    "ci_high": 0.4484,
+    "subset": "Dataset B (n=9520)"
+  },
+  "security_txt": {
+    "successes": 199,
+    "n": 8438,
+    "proportion": 0.0236,
+    "ci_low": 0.0206,
+    "ci_high": 0.027,
+    "subset": "Dataset B (n=8438)"
+  },
+  "reachable": {
+    "successes": 8829,
+    "n": 10020,
+    "proportion": 0.8811,
+    "ci_low": 0.8747,
+    "ci_high": 0.8873,
+    "subset": "Dataset C (n=10020)"
+  }
+}

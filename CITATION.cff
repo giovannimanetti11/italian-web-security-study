@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below. To cite the dataset specifically, use its own Zenodo DOI (see README); to cite the paper, use the preferred-citation below."
+title: "Italian Web Security Study (IWSS)"
+type: software
+authors:
+  - family-names: "Manetti"
+    given-names: "Giovanni"
+    email: "giovanni@perseodesign.com"
+repository-code: "https://github.com/giovannimanetti11/italian-web-security-study"
+url: "https://f-hack.com/analisi-sicurezza-web-italiano-2026"
+abstract: >
+  A large-scale passive measurement study of the security configuration of
+  the Italian web, covering 10,022 .it domains sampled from the Tranco
+  top-1M list. Measures HTTP security headers, Content-Security-Policy,
+  cookie security attributes, TLS configuration, DNS email authentication
+  (SPF, DMARC, DKIM), well-known resources, and CORS configuration using
+  exclusively passive, browser-equivalent requests.
+keywords:
+  - web security
+  - security measurement
+  - passive scanning
+  - HTTP security headers
+  - Content-Security-Policy
+  - TLS
+  - DNS security
+  - Italy
+  - large-scale measurement study
+license: MIT
+version: 1.0.0
+date-released: "2026-07-12"
+preferred-citation:
+  type: generic
+  title: "Measuring the Security Configuration of the Italian Web: A Large-Scale Passive Measurement Study"
+  authors:
+    - family-names: "Manetti"
+      given-names: "Giovanni"
+      email: "giovanni@perseodesign.com"
+  year: 2026
+  doi: "10.5281/zenodo.21322437"
+  notes: "Preprint, published on Zenodo."
