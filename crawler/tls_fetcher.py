@@ -13,6 +13,7 @@ import ssl
 import time
 
 from crawler.models import TLSFetchResult
+from crawler.network_safety import resolve_public_addresses
 
 PORT = 443
 CONNECT_TIMEOUT = 8.0  # real handshake — unchanged
@@ -50,6 +51,22 @@ async def _supports_version(domain: str, version: ssl.TLSVersion, timeout: float
 
 async def fetch_tls(domain: str) -> TLSFetchResult:
     t0 = time.monotonic()
+    try:
+        await resolve_public_addresses(domain)
+    except Exception as exc:
+        elapsed_ms = int((time.monotonic() - t0) * 1000)
+        return TLSFetchResult(
+            domain=domain,
+            tls_ok=False,
+            tls_version_negotiated=None,
+            cipher_suite=None,
+            tls10_supported=False,
+            tls11_supported=False,
+            peer_cert_der=None,
+            error=f"{type(exc).__name__}: {exc}",
+            elapsed_ms=elapsed_ms,
+        )
+
     tls10_supported = await _supports_version(domain, ssl.TLSVersion.TLSv1, LEGACY_PROBE_TIMEOUT)
     tls11_supported = await _supports_version(
         domain, ssl.TLSVersion.TLSv1_1, LEGACY_PROBE_TIMEOUT

@@ -24,6 +24,7 @@ import time
 import httpx
 
 from crawler.models import FetchResult, RedirectHop, ScanStatus
+from crawler.network_safety import UnsafeNetworkTarget
 
 MAX_BODY_BYTES = 5_000_000
 
@@ -45,6 +46,8 @@ def _root_cause(exc: BaseException) -> BaseException:
 
 
 def _classify_error(exc: Exception) -> ScanStatus:
+    if isinstance(exc, UnsafeNetworkTarget):
+        return "blocked"
     if isinstance(exc, httpx.TimeoutException):
         return "timeout"
     root = _root_cause(exc)

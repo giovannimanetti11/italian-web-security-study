@@ -30,6 +30,7 @@ from crawler.dns_fetcher import fetch_dns
 from crawler.fetcher import fetch_site
 from crawler.models import FetchResult
 from crawler.network_budget import NetworkBudget
+from crawler.network_safety import enforce_public_http_request
 from crawler.profiles import BASELINE_V1, MeasurementProfile
 from crawler.rate_limiter import PerHostRateLimiter
 from crawler.tls_fetcher import fetch_tls
@@ -350,6 +351,7 @@ async def run_crawl(
                 verify=False,
                 timeout=CRAWLER.request_timeout,
                 headers={"User-Agent": CRAWLER.user_agent},
+                event_hooks={"request": [enforce_public_http_request]},
             ) as client:
                 tasks = [
                     scan_one(
